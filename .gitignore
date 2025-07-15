@@ -2,3 +2,5 @@
 *.xcuserstate
 *.xcuserdata/
 *.xcworkspace/xcuserdata/
+poc-chat-azure-ios/.DS_Store
+.DS_Store
