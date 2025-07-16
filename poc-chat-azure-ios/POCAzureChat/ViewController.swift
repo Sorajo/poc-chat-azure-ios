@@ -1,8 +1,8 @@
 //
 //  ViewController.swift
-//  poc-chat-azure-ios
+//  POCAzureChat
 //
-//  Created by POC on 15/7/2568 BE.
+//  Created by Soraj  on 16/7/2568 BE.
 //
 
 import UIKit
