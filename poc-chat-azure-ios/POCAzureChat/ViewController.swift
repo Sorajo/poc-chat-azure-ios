@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  POCAzureChat
 //
-//  Created by Soraj  on 16/7/2568 BE.
+//  Created by POC  on 16/7/2568 BE.
 //
 
 import UIKit

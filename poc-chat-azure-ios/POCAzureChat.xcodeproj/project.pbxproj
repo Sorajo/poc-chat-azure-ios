@@ -13,7 +13,39 @@
 		0725DA552E27892B00E9D880 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0725DA542E27892B00E9D880 /* Assets.xcassets */; };
 		0725DA582E27892B00E9D880 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0725DA562E27892B00E9D880 /* LaunchScreen.storyboard */; };
 		8779226D2E278F8D00A779CA /* AzureCommunicationChat in Frameworks */ = {isa = PBXBuildFile; productRef = 8779226C2E278F8D00A779CA /* AzureCommunicationChat */; };
+		879E70432E2799540054E11B /* ChatManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879E70422E27994B0054E11B /* ChatManager.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		879E69342E2791C70054E11B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 879E66702E2791C70054E11B /* AzureCommunicationUICalling.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A8659FC52602A22000C807DE;
+			remoteInfo = AzureCommunicationUICalling;
+		};
+		879E69362E2791C70054E11B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 879E66702E2791C70054E11B /* AzureCommunicationUICalling.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1FBCB69A2645285100F57EEA;
+			remoteInfo = AzureCommunicationUICallingTests;
+		};
+		879E693A2E2791C70054E11B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 879E672A2E2791C70054E11B /* AzureCommunicationUIChat.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 50CB81C228C26E0C00680566;
+			remoteInfo = AzureCommunicationUIChat;
+		};
+		879E693C2E2791C70054E11B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 879E672A2E2791C70054E11B /* AzureCommunicationUIChat.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 50CB81CA28C26E0C00680566;
+			remoteInfo = AzureCommunicationUIChatTests;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		0725DA482E27892900E9D880 /* POCAzureChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = POCAzureChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -23,6 +55,9 @@
 		0725DA542E27892B00E9D880 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0725DA572E27892B00E9D880 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0725DA592E27892B00E9D880 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		879E66702E2791C70054E11B /* AzureCommunicationUICalling.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = AzureCommunicationUICalling.xcodeproj; sourceTree = "<group>"; };
+		879E672A2E2791C70054E11B /* AzureCommunicationUIChat.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = AzureCommunicationUIChat.xcodeproj; sourceTree = "<group>"; };
+		879E70422E27994B0054E11B /* ChatManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +91,7 @@
 		0725DA4A2E27892900E9D880 /* POCAzureChat */ = {
 			isa = PBXGroup;
 			children = (
+				879E70412E27993B0054E11B /* Manager */,
 				0725DA4B2E27892900E9D880 /* AppDelegate.swift */,
 				0725DA4F2E27892900E9D880 /* ViewController.swift */,
 				0725DA512E27892900E9D880 /* Main.storyboard */,
@@ -64,6 +100,32 @@
 				0725DA592E27892B00E9D880 /* Info.plist */,
 			);
 			path = POCAzureChat;
+			sourceTree = "<group>";
+		};
+		879E67302E2791C70054E11B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				879E69352E2791C70054E11B /* AzureCommunicationUICalling.framework */,
+				879E69372E2791C70054E11B /* AzureCommunicationUICallingTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		879E67322E2791C70054E11B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				879E693B2E2791C70054E11B /* AzureCommunicationUIChat.framework */,
+				879E693D2E2791C70054E11B /* AzureCommunicationUIChatTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		879E70412E27993B0054E11B /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				879E70422E27994B0054E11B /* ChatManager.swift */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -108,6 +170,46 @@
 			knownRegions = (
 				en,
 				Base,
+				ar,
+				it,
+				"fr-CA",
+				"zh-Hant",
+				fr,
+				de,
+				he,
+				"zh-Hant-TW",
+				"zh-Hans",
+				ja,
+				"it-IT",
+				"nb-NO",
+				nb,
+				"en-GB",
+				es,
+				"ru-RU",
+				"tr-TR",
+				"es-ES",
+				"ar-SA",
+				"fr-FR",
+				"ja-JP",
+				sv,
+				"ko-KR",
+				ko,
+				"fi-FI",
+				tr,
+				pl,
+				"pt-BR",
+				"nl-NL",
+				ru,
+				"en-US",
+				"de-DE",
+				fi,
+				nl,
+				"pl-PL",
+				pt,
+				"zh-Hans-CN",
+				"sv-SE",
+				"he-IL",
+				zh,
 			);
 			mainGroup = 0725DA3F2E27892900E9D880;
 			packageReferences = (
@@ -115,12 +217,53 @@
 			);
 			productRefGroup = 0725DA492E27892900E9D880 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 879E67302E2791C70054E11B /* Products */;
+					ProjectRef = 879E66702E2791C70054E11B /* AzureCommunicationUICalling.xcodeproj */;
+				},
+				{
+					ProductGroup = 879E67322E2791C70054E11B /* Products */;
+					ProjectRef = 879E672A2E2791C70054E11B /* AzureCommunicationUIChat.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				0725DA472E27892900E9D880 /* POCAzureChat */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		879E69352E2791C70054E11B /* AzureCommunicationUICalling.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = AzureCommunicationUICalling.framework;
+			remoteRef = 879E69342E2791C70054E11B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		879E69372E2791C70054E11B /* AzureCommunicationUICallingTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = AzureCommunicationUICallingTests.xctest;
+			remoteRef = 879E69362E2791C70054E11B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		879E693B2E2791C70054E11B /* AzureCommunicationUIChat.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = AzureCommunicationUIChat.framework;
+			remoteRef = 879E693A2E2791C70054E11B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		879E693D2E2791C70054E11B /* AzureCommunicationUIChatTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = AzureCommunicationUIChatTests.xctest;
+			remoteRef = 879E693C2E2791C70054E11B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		0725DA462E27892900E9D880 /* Resources */ = {
@@ -140,6 +283,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				879E70432E2799540054E11B /* ChatManager.swift in Sources */,
 				0725DA502E27892900E9D880 /* ViewController.swift in Sources */,
 				0725DA4C2E27892900E9D880 /* AppDelegate.swift in Sources */,
 			);
@@ -295,7 +439,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -323,7 +467,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
