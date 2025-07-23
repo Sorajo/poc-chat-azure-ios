@@ -79,6 +79,9 @@ class ChatViewController: UITableViewController, ChatDisplayLogic {
         return chatRows.count
     }
 
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let row = chatRows[indexPath.row]
         switch row {
@@ -112,39 +115,6 @@ class ChatViewController: UITableViewController, ChatDisplayLogic {
         guard lastRow >= 0 else { return }
         let indexPath = IndexPath(row: lastRow, section: 0)
         tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
-    }
-
-    // Grouping logic moved to presenter
-}
-
-// MARK: - ChatRow Enum
-enum ChatRow {
-    case message(ChatMessage)
-    case timestamp(String)
-}
-
-// MARK: - TimestampLabelCell
-class TimestampLabelCell: UITableViewCell {
-    private let label = UILabel()
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 13, weight: .medium)
-        label.textColor = .secondaryLabel
-        contentView.addSubview(label)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            label.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 4),
-            label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -4)
-        ])
-        selectionStyle = .none
-        backgroundColor = .clear
-    }
-    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
-    func configure(with timestamp: String) {
-        label.text = timestamp
     }
 }
 
