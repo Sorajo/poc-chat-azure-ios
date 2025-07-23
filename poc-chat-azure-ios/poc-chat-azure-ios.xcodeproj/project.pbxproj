@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		97E20FC12E2E36F5000169C1 /* AzureCommunicationChat in Frameworks */ = {isa = PBXBuildFile; productRef = 97E20FC02E2E36F5000169C1 /* AzureCommunicationChat */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		872450C82E260933006F5129 /* poc-chat-azure-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "poc-chat-azure-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -36,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				97E20FC12E2E36F5000169C1 /* AzureCommunicationChat in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +83,7 @@
 			);
 			name = "poc-chat-azure-ios";
 			packageProductDependencies = (
+				97E20FC02E2E36F5000169C1 /* AzureCommunicationChat */,
 			);
 			productName = "poc-chat-azure-ios";
 			productReference = 872450C82E260933006F5129 /* poc-chat-azure-ios.app */;
@@ -107,6 +113,9 @@
 			);
 			mainGroup = 872450BF2E260933006F5129;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				97E20FBF2E2E36F5000169C1 /* XCRemoteSwiftPackageReference "SwiftPM-AzureCommunicationChat" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 872450C92E260933006F5129 /* Products */;
 			projectDirPath = "";
@@ -152,6 +161,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -179,6 +189,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -333,6 +344,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		97E20FBF2E2E36F5000169C1 /* XCRemoteSwiftPackageReference "SwiftPM-AzureCommunicationChat" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Azure/SwiftPM-AzureCommunicationChat.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.3.7;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		97E20FC02E2E36F5000169C1 /* AzureCommunicationChat */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 97E20FBF2E2E36F5000169C1 /* XCRemoteSwiftPackageReference "SwiftPM-AzureCommunicationChat" */;
+			productName = AzureCommunicationChat;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 872450C02E260933006F5129 /* Project object */;
 }
