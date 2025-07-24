@@ -24,11 +24,11 @@ class ChatService: ChatServiceProtocol {
     
     
     // Replace with your ACS endpoint and user access token
-    private let endpoint = "https://acs-chat-dev.asiapacific.communication.azure.com" // e.g. "https://<RESOURCE_NAME>.communication.azure.com"
-    private let userAccessToken = "eyJhbGciOiJSUzI1NiIsImtpZCI6IkRCQTFENTczNEY1MzM4QkRENjRGNjA4NjE2QTQ5NzFCOTEwNjU5QjAiLCJ4NXQiOiIyNkhWYzA5VE9MM1dUMkNHRnFTWEc1RUdXYkEiLCJ0eXAiOiJKV1QifQ.eyJza3lwZWlkIjoiYWNzOmI1YzcxNzc2LWNmYTgtNGY3My04NzNkLTllNDJiZGMzZGM1MV8wMDAwMDAyOC1iYjViLTIxZjQtNzNjYi1jODNhMGQwMDBhNjkiLCJzY3AiOjE3OTIsImNzaSI6IjE3NTMyMzc3MjYiLCJleHAiOjE3NTMzMjQxMjYsInJnbiI6ImFwYWMiLCJhY3NTY29wZSI6ImNoYXQiLCJyZXNvdXJjZUlkIjoiYjVjNzE3NzYtY2ZhOC00ZjczLTg3M2QtOWU0MmJkYzNkYzUxIiwicmVzb3VyY2VMb2NhdGlvbiI6ImFzaWFwYWNpZmljIiwiaWF0IjoxNzUzMjM3NzI2fQ.WxDhQ8Mc4d47MBshqG5YVSfWoF5liEigHaT4nF4LjlmjmUoMxWeLv0iPqW57blbyzG9jk7HAdAZpCVz4f9R1v7cGrZXDUQTpmNxqE14XJ7o5s7jECElpmact_eDUWmNbWBgB4cW8NSMYEdNESvV62RF51Yk9q5u5P_Sag9Y2D2ZjRXO83YJusZgWfCmgWEyEVdxtKy47NNxEIj7lzA_flhr2NskTB3kzyUv3NOgxdgNb6-5dXf1IgJArNzQys4zBIhna7sawmJbuyhI1EFe9KyZnrLW6dpE5GGrOTk1LaXVGk67WMVbdBzwaUbdwDtn_p9zEiSFiZJtvxlct2wLAsQ"
+    private let endpoint = "" // e.g. "https://<RESOURCE_NAME>.communication.azure.com"
+    private let userAccessToken = ""
     private let displayName = "iOS User"
-    private let userId = "8:acs:b5c71776-cfa8-4f73-873d-9e42bdc3dc51_00000028-bb5b-21f4-73cb-c83a0d000a69"
-    private let threadId = "19:acsV1_G68PN0dAUb_Lr7xlXArGwvPx-SGMii2wDz4H0iY5wfo1@thread.v2"
+    private let userId = ""
+    private let threadId = ""
     
     // ...existing code...
 
