@@ -1,7 +1,7 @@
 import UIKit
 import AzureCore
 
-struct ChatMessage {
+struct ChatMessage: Codable {
     let text: String
     let isIncoming: Bool
     let createdOn: Iso8601Date
