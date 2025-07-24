@@ -31,11 +31,11 @@ class ChatService: ChatServiceProtocol {
     
     
     // Replace with your ACS endpoint and user access token
-    private let endpoint = "https://acs-chat-dev.asiapacific.communication.azure.com" // e.g. "https://<RESOURCE_NAME>.communication.azure.com"
-    private let userAccessToken = "eyJhbGciOiJSUzI1NiIsImtpZCI6IkRCQTFENTczNEY1MzM4QkRENjRGNjA4NjE2QTQ5NzFCOTEwNjU5QjAiLCJ4NXQiOiIyNkhWYzA5VE9MM1dUMkNHRnFTWEc1RUdXYkEiLCJ0eXAiOiJKV1QifQ.eyJza3lwZWlkIjoiYWNzOmI1YzcxNzc2LWNmYTgtNGY3My04NzNkLTllNDJiZGMzZGM1MV8wMDAwMDAyOC1iYjViLTIxZjQtNzNjYi1jODNhMGQwMDBhNjkiLCJzY3AiOjE3OTIsImNzaSI6IjE3NTMzMzc4MTYiLCJleHAiOjE3NTM0MjQyMTYsInJnbiI6ImFwYWMiLCJhY3NTY29wZSI6ImNoYXQiLCJyZXNvdXJjZUlkIjoiYjVjNzE3NzYtY2ZhOC00ZjczLTg3M2QtOWU0MmJkYzNkYzUxIiwicmVzb3VyY2VMb2NhdGlvbiI6ImFzaWFwYWNpZmljIiwiaWF0IjoxNzUzMzM3ODE2fQ.D3MWAr_e9RRbK_m_JbFXsj0mcS81ixTBhauYofeq6nrM33szFzcWt8qNfu07U6aivFkeIYfs2UIsrOhiT8kd5b-ofeuYNz6CxCTHoWsWTNZyhls-cRRoB7bIggwD-WdrAVJ_5HRbwreZZdWTW3i0Q-MXUFzNLgWHt_c4PEXU3hqQF1-GHTp2VC2cGlOYB4L_AdNnHNfL5868wCiwQ4_bXYLA7hfFXo9IrGZLA9N7ti8Ppq__ukGmscLoihWZZUxjnJOrio5ptQHVL6LHhxrWGWxBBZRMzLW-XiiNQAXT-eEOQYWSV4qhwC31w9bsIlxFIip0n42Ncv-Lq9F4cy30UQ"
-    private let displayName = "Mai iOS"
+    private let endpoint = "" // e.g. "https://<RESOURCE_NAME>.communication.azure.com"
+    private let userAccessToken = ""
+    private let displayName = ""
     private var userId = ""
-    private let threadId = "19:acsV1_G68PN0dAUb_Lr7xlXArGwvPx-SGMii2wDz4H0iY5wfo1@thread.v2"
+    private let threadId = ""
     
     func createClient(completion: @escaping (Result<ChatClient, Error>) -> Void) {
         DispatchQueue.global(qos: .background).async {
