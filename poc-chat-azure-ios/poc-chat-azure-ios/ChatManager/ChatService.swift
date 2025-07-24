@@ -5,7 +5,6 @@ import AzureCore
 
 protocol ChatServiceProtocol {
     func createClient(completion: @escaping (Result<ChatClient, Error>) -> Void)
-//    func createThread(completion: @escaping (Result<String?, Error>) -> Void)
     func getThreadClient(completion: @escaping (Result<ChatThreadClient?, Error>) -> Void)
     func getHistory(completion: @escaping (Result<[ChatMessage], String>) -> Void)
     func receiveMessages(completion: @escaping (Result<Void, Error>) -> Void)
@@ -16,20 +15,27 @@ protocol ChatServiceProtocol {
 
 protocol ChatServiceDelegare: AnyObject {
     func receiveAZMessages(meaaage: ChatMessage)
+    func showTypingIndicator(sender: String)
 }
 
 class ChatService: ChatServiceProtocol {
+    deinit {
+        if let chatClient = chatClient {
+            chatClient.stopRealTimeNotifications()
+        }
+    }
+    private var typingHandlerRegistered = false
     private var chatClient: ChatClient?
     private var threadClient: ChatThreadClient?
     internal var delegate: ChatServiceDelegare?
     
     
     // Replace with your ACS endpoint and user access token
-    private let endpoint = "" // e.g. "https://<RESOURCE_NAME>.communication.azure.com"
-    private let userAccessToken = ""
-    private let displayName = ""
+    private let endpoint = "https://acs-chat-dev.asiapacific.communication.azure.com" // e.g. "https://<RESOURCE_NAME>.communication.azure.com"
+    private let userAccessToken = "eyJhbGciOiJSUzI1NiIsImtpZCI6IkRCQTFENTczNEY1MzM4QkRENjRGNjA4NjE2QTQ5NzFCOTEwNjU5QjAiLCJ4NXQiOiIyNkhWYzA5VE9MM1dUMkNHRnFTWEc1RUdXYkEiLCJ0eXAiOiJKV1QifQ.eyJza3lwZWlkIjoiYWNzOmI1YzcxNzc2LWNmYTgtNGY3My04NzNkLTllNDJiZGMzZGM1MV8wMDAwMDAyOC1iYjViLTIxZjQtNzNjYi1jODNhMGQwMDBhNjkiLCJzY3AiOjE3OTIsImNzaSI6IjE3NTMzMzc4MTYiLCJleHAiOjE3NTM0MjQyMTYsInJnbiI6ImFwYWMiLCJhY3NTY29wZSI6ImNoYXQiLCJyZXNvdXJjZUlkIjoiYjVjNzE3NzYtY2ZhOC00ZjczLTg3M2QtOWU0MmJkYzNkYzUxIiwicmVzb3VyY2VMb2NhdGlvbiI6ImFzaWFwYWNpZmljIiwiaWF0IjoxNzUzMzM3ODE2fQ.D3MWAr_e9RRbK_m_JbFXsj0mcS81ixTBhauYofeq6nrM33szFzcWt8qNfu07U6aivFkeIYfs2UIsrOhiT8kd5b-ofeuYNz6CxCTHoWsWTNZyhls-cRRoB7bIggwD-WdrAVJ_5HRbwreZZdWTW3i0Q-MXUFzNLgWHt_c4PEXU3hqQF1-GHTp2VC2cGlOYB4L_AdNnHNfL5868wCiwQ4_bXYLA7hfFXo9IrGZLA9N7ti8Ppq__ukGmscLoihWZZUxjnJOrio5ptQHVL6LHhxrWGWxBBZRMzLW-XiiNQAXT-eEOQYWSV4qhwC31w9bsIlxFIip0n42Ncv-Lq9F4cy30UQ"
+    private let displayName = "Mai iOS"
     private var userId = ""
-    private let threadId = ""
+    private let threadId = "19:acsV1_G68PN0dAUb_Lr7xlXArGwvPx-SGMii2wDz4H0iY5wfo1@thread.v2"
     
     func createClient(completion: @escaping (Result<ChatClient, Error>) -> Void) {
         DispatchQueue.global(qos: .background).async {
@@ -50,33 +56,6 @@ class ChatService: ChatServiceProtocol {
             }
         }
     }
-    
-    // Aleady created from BE then they will send chat thread id vai API
-//    func createThread(completion: @escaping (Result<String?, Error>) -> Void) {
-//        guard let chatClient = self.chatClient else {
-//            completion(.failure(NSError(domain: "ChatService", code: -1, userInfo: [NSLocalizedDescriptionKey: "ChatClient not initialized"])))
-//            return
-//        }
-//        let request = CreateChatThreadRequest(
-//            topic: "Quickstart",
-//            participants: [
-//                ChatParticipant(
-//                    id: CommunicationUserIdentifier(self.userId),
-//                    displayName: self.displayName
-//                )
-//            ]
-//        )
-//        chatClient.create(thread: request) { result, _ in
-//            switch result {
-//            case let .success(result):
-//                let threadId = result.chatThread?.id
-//                print("create thread success with: \(result.chatThread?.topic ?? "NA") threadId: \(threadId ?? "NA")")
-//                completion(.success(threadId))
-//            case .failure(let error):
-//                completion(.failure(error))
-//            }
-//        }
-//    }
     
     func getThreadClient(completion: @escaping (Result<ChatThreadClient?, Error>) -> Void) {
         guard let chatClient = self.chatClient else {
@@ -107,8 +86,9 @@ class ChatService: ChatServiceProtocol {
                     let chatHistory: [ChatMessage] = pagedMessages.items?.compactMap { msg in
                         guard let messageText = msg.content?.message else { return nil }
                         return ChatMessage(
+                            id: msg.id,
                             text: messageText,
-                            isIncoming: self.isMessageOwner(sender: msg.sender),
+                            isIncoming: !self.isMessageOwner(sender: msg.sender),
                             createdOn: msg.createdOn
                         )
                     } ?? []
@@ -136,8 +116,9 @@ class ChatService: ChatServiceProtocol {
                     switch response {
                     case let .chatMessageReceivedEvent(event):
                         let chatMessage = ChatMessage(
+                            id: event.id,
                             text: event.message,
-                            isIncoming: self.isMessageOwner(sender: event.sender),
+                            isIncoming: !self.isMessageOwner(sender: event.sender),
                             createdOn: event.createdOn ?? Iso8601Date.now
                         )
                         self.delegate?.receiveAZMessages(meaaage: chatMessage)
@@ -145,6 +126,19 @@ class ChatService: ChatServiceProtocol {
                         return
                     }
                 })
+                // Register typing indicator event only once
+                if !self.typingHandlerRegistered {
+                    chatClient.register(event: .typingIndicatorReceived, handler: { response in
+                        switch response {
+                        case .typingIndicatorReceived(let event):
+                            if event.threadId == self.threadId , event.sender?.rawId != self.userId {
+                                self.delegate?.showTypingIndicator(sender: event.senderDisplayName ?? "Someone")
+                            }
+                        default: break
+                        }
+                    })
+                    self.typingHandlerRegistered = true
+                }
             case .failure(let error):
                 print("Failed to start real-time notifications.")
                 completion(.failure(error))
@@ -168,6 +162,7 @@ class ChatService: ChatServiceProtocol {
                 completion(
                     .success(
                         ChatMessage(
+                            id: UUID().uuidString,
                             text: text,
                             isIncoming: false,
                             createdOn: Iso8601Date.now
@@ -201,8 +196,9 @@ class ChatService: ChatServiceProtocol {
                     let messages: [ChatMessage] = page.items?.compactMap { msg in
                         guard let messageText = msg.content?.message else { return nil }
                         return ChatMessage(
+                            id: msg.id,
                             text: messageText,
-                            isIncoming: self.isMessageOwner(sender: msg.sender),
+                            isIncoming: !self.isMessageOwner(sender: msg.sender),
                             createdOn: msg.createdOn
                         )
                     } ?? []
@@ -248,7 +244,7 @@ extension ChatService {
         guard let senderId = sender?.rawId else {
             return false
         }
-        return userId != senderId
+        return userId == senderId
     }
     
     func extractUserId(from token: String) -> String? {

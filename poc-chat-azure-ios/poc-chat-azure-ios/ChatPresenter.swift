@@ -1,20 +1,25 @@
 import Foundation
 
+enum TypingType {
+    case none
+    case typing(String)
+}
 protocol ChatPresentationLogic: AnyObject {
-    func presentMessages(_ messages: [ChatMessage], isOtherUserTyping: Bool)
-    func presentOtherUserTyping(_ typing: Bool)
+    func presentMessages(_ messages: [ChatMessage])
+    func presentOtherUserTyping(_ typing: TypingType)
 }
 
 final class ChatPresenter: ChatPresentationLogic {
     weak var viewController: ChatDisplayLogic?
 
-    func presentMessages(_ messages: [ChatMessage], isOtherUserTyping: Bool) {
+    func presentMessages(_ messages: [ChatMessage]) {
         let chatRows = makeChatRows(from: messages)
-        viewController?.displayChatRows(chatRows, isOtherUserTyping: false)
+        viewController?.displayChatRows(chatRows)
     }
 
-    func presentOtherUserTyping(_ typing: Bool) {
+    func presentOtherUserTyping(_ typing: TypingType) {
         viewController?.displayOtherUserTyping(typing)
+        // viewController?.displayOtherUserTyping(typing)
     }
 
     // Converts [ChatMessage] to [ChatRow] with formatted timestamp strings

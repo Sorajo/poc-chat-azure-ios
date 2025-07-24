@@ -4,7 +4,7 @@ import UIKit
 class ChatViewController: UITableViewController, ChatDisplayLogic {
     // ChatRow: either a message or a timestamp label (now contains formatted string for timestamp)
     private var chatRows: [ChatRow] = []
-    private var isOtherUserTyping: Bool = false
+    private var isOtherUserTyping: TypingType = .none
     private let messageInputBar = MessageInputBar()
     private var inputBarBottomConstraint: NSLayoutConstraint?
 
@@ -97,17 +97,30 @@ class ChatViewController: UITableViewController, ChatDisplayLogic {
     }
 
     // MARK: - Clean Swift Display Logic
-    func displayChatRows(_ chatRows: [ChatRow], isOtherUserTyping: Bool) {
+    func displayChatRows(_ chatRows: [ChatRow]) {
         self.chatRows = chatRows
-        self.isOtherUserTyping = isOtherUserTyping
         tableView.reloadData()
         scrollToBottom()
     }
-
-    func displayOtherUserTyping(_ typing: Bool) {
+    
+    func displayOtherUserTyping(_ typing: TypingType) {
         self.isOtherUserTyping = typing
-        tableView.reloadData()
-        if typing { scrollToBottom() }
+        switch typing {
+        case .none:
+            // Remove any "typing..." indicator from chatRows
+            if let last = chatRows.last, case .timestamp(let text) = last, text.contains("is typing...") {
+                chatRows.removeLast()
+                tableView.reloadData()
+            }
+        case .typing(let sender):
+            // Add a "typing..." indicator to the table view
+            let typingRow = ChatRow.timestamp("\(sender) is typing...")
+            if chatRows.last != typingRow {
+                chatRows.append(typingRow)
+                tableView.reloadData()
+                scrollToBottom()
+            }
+        }
     }
 
     private func scrollToBottom() {
@@ -124,7 +137,7 @@ extension ChatViewController: MessageInputBarDelegate {
         interactor?.sendMessage(text)
     }
     func didChangeTyping(_ isTyping: Bool) {
-        interactor?.setOtherUserTyping(isTyping)
+//        interactor?.setOtherUserTyping(isTyping)
     }
 }
 
