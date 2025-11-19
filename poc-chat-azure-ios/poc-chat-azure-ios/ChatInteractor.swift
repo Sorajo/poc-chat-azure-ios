@@ -7,6 +7,7 @@ import AzureCore
 protocol ChatBusinessLogic: AnyObject {
     func startAZS()
     func sendMessage(_ text: String)
+    func cleanup()
 }
 
 final class ChatInteractor: ChatBusinessLogic {
@@ -19,6 +20,10 @@ final class ChatInteractor: ChatBusinessLogic {
     init(chatService: ChatServiceProtocol) {
         self.chatService = chatService
         self.chatService.delegate = self
+    }
+    
+    deinit {
+        print("ChatInteractor deallocated")
     }
     
     func sendMessage(_ text: String) {
@@ -60,6 +65,13 @@ final class ChatInteractor: ChatBusinessLogic {
                 print("Create client error: \(error.localizedDescription)")
             }
         }
+    }
+    
+    func cleanup() {
+        print("Cleaning up ChatInteractor...")
+        chatService.cleanup()
+        messages.removeAll()
+        chatService.delegate = nil
     }
 }
 

@@ -9,6 +9,12 @@ class ChatViewController: UITableViewController, ChatDisplayLogic {
     private var inputBarBottomConstraint: NSLayoutConstraint?
 
     var interactor: ChatBusinessLogic?
+    
+    deinit {
+        // Remove observers
+        NotificationCenter.default.removeObserver(self)
+        print("ChatViewController deallocated")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +28,14 @@ class ChatViewController: UITableViewController, ChatDisplayLogic {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         interactor?.startAZS()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        // Check if we're being popped from navigation stack
+        if isMovingFromParent {
+            interactor?.cleanup()
+        }
     }
 
     private func build() {

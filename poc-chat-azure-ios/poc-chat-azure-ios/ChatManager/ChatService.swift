@@ -9,6 +9,7 @@ protocol ChatServiceProtocol {
     func getHistory(completion: @escaping (Result<[ChatMessage], String>) -> Void)
     func receiveMessages(completion: @escaping (Result<Void, Error>) -> Void)
     func sendMessage(_ text: String, completion: @escaping (Result<ChatMessage, Error>) -> Void)
+    func cleanup()
     // func getHistoryPaginated(pageSize: Int = 50, completion: @escaping (Result<[ChatMessage], String>) -> Void)
     var delegate: ChatServiceDelegare? { get set }
 }
@@ -20,14 +21,15 @@ protocol ChatServiceDelegare: AnyObject {
 
 class ChatService: ChatServiceProtocol {
     deinit {
-        if let chatClient = chatClient {
-            chatClient.stopRealTimeNotifications()
-        }
+        print("ChatService deallocated")
+        // Force synchronous cleanup in deinit
+        cleanup()
     }
     private var typingHandlerRegistered = false
     private var chatClient: ChatClient?
     private var threadClient: ChatThreadClient?
     internal var delegate: ChatServiceDelegare?
+    private var isCleaningUp = false
     
     
     // Replace with your ACS endpoint and user access token
@@ -221,6 +223,31 @@ class ChatService: ChatServiceProtocol {
     } catch {
         completion(.failure(error.localizedDescription))
     }
+    }
+    
+    /// Synchronous cleanup for deinit - ensures WebSocket is closed before deallocation
+    internal func cleanup() {
+        guard !isCleaningUp else { return }
+        
+        print("Performing synchronous cleanup in deinit...")
+        
+        // Unregister event handlers
+        chatClient?.unregister(event: .chatMessageReceived)
+        chatClient?.unregister(event: .typingIndicatorReceived)
+        
+        // Stop WebSocket synchronously (blocks until WebSocket is closed)
+        if chatClient != nil {
+            chatClient?.stopRealTimeNotifications()
+            print("✅ WebSocket stopped in deinit")
+        }
+        
+        // Clear all references
+        threadClient = nil
+        chatClient = nil
+        delegate = nil
+        typingHandlerRegistered = false
+        
+        print("✅ Synchronous cleanup completed")
     }
 }
 
